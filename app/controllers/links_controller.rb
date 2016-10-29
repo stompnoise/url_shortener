@@ -60,6 +60,11 @@ class LinksController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def go
+    @link = Link.find_by_code!(params[:code])
+    redirect_to @link.url
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
