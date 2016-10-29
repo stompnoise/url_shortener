@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       post '/get_url' => 'links_api#get_url'
+      post '/get_stats' => 'links_api#get_stats'
     end
   end
 

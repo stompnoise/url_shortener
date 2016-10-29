@@ -19,6 +19,18 @@ module Api
         end
         
       end
+      
+      def get_stats
+        
+        visits = Visit.find_by landing_page: params[:url]
+        Rails.logger.info(visits.inspect)
+        if(visits)
+          render json: visits
+        else
+          render json: {}
+        end     
+        
+      end
      
     end
   end

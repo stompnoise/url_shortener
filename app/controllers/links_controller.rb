@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
+  after_action :track_action
 
   # GET /links
   # GET /links.json
@@ -63,7 +64,7 @@ class LinksController < ApplicationController
   
   def go
     @link = Link.find_by_code!(params[:code])
-    redirect_to @link.url
+    #redirect_to @link.url
   end  
 
   private
@@ -76,4 +77,10 @@ class LinksController < ApplicationController
     def link_params
       params.require(:link).permit(:url)
     end
+    
+  protected
+
+  def track_action
+    ahoy.track "Processed #{controller_name}##{action_name}", request.filtered_parameters
+  end
 end
